@@ -1,0 +1,47 @@
+<p>
+  Bienvenue {{username}}
+</p>
+
+<app-modal
+  *ngIf=message
+  [modalText]=messageState>
+</app-modal>
+
+<div class="form-container">
+  <app-card
+    *ngFor="let character of currentGameWord.split('')"
+    [character]=character
+    [etat]=subjectEtat
+    style='height: 100px; width: 100px; background-color: red; border: black 1px solid; padding: 5px; font-size: 20px; border-radius: 15px;'>
+  </app-card>
+</div><!-- /.form-container -->
+
+<br><br>
+
+<p>
+  Il vous reste {{chanceLeft}} chance.
+</p>
+
+<form #answerForm="ngForm" class="answer-form">
+  <label for="answer">Essayer un caractère</label>
+  <br>
+  <input
+    type="text"
+    placeholder="Ici"
+    minlength="1"
+    maxlength="1"
+    required
+    title="1 caractère maximum"
+    (change)=tryThisCharacter($event.target.value.toUpperCase(),this.mapState)>
+
+  <br><br>
+
+  <!-- Refact disable button -->
+  <button
+    type="submit"
+    onclick="this.form.reset();"
+    [disabled]="!answerForm.form.valid">
+    Valider
+  </button>
+</form>
+
