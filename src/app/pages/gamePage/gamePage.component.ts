@@ -130,16 +130,16 @@ export class GamePageComponent implements OnDestroy {
   setPluralTry = () => this.pluralTryState.next('');
 
   // timeout = (this.messageState) => setTimeout(this.messageState.next(''), 30000);
-  timeout = async (duration: number, reloadGame: boolean) => {
-    await this.delay(duration);
+  timeout = async (durationOnMS: number, reloadGame: boolean) => {
+    await this.delay(durationOnMS);
     this.messageState.next('');
     if (reloadGame) {
       this.resetGame();
     }
   }
 
-  delay = (ms: number) => {
-    return new Promise( resolve => setTimeout(resolve, 1000000000) );
+  delay = (durationOnMS: number) => {
+    return new Promise( resolve => setTimeout(resolve, durationOnMS) );
   }
 
   resetGame = () => {

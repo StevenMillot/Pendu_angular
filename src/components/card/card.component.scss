@@ -30,10 +30,10 @@
     }
   }
 
-  &__side--front &.reveal-card {
+  .reveal-card {
     transform: rotateY(-180deg);
   }
-  &__side--back &.reveal-card{
+  .reveal-card{
     transform: rotateY(0);
   }
 
