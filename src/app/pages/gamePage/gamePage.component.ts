@@ -29,8 +29,6 @@ export class GamePageComponent implements OnDestroy {
   secretWordsArray = ['javascript', 'php', 'java', 'ruby', 'sql', 'pyton', 'lorem', 'basic', 'c++'];
 
   constructor(private activatedRoute: ActivatedRoute) {
-    // permet de sousrire a notre observable, le surveille et retourne les changements
-    // a chaque changement de valeur (chaque nouveau .next), je stoque la valeur actuel dans secretWordMap
     this.routeSubscription = this.activatedRoute.queryParams.subscribe(params => this.username = params.username);
     this.cardsState.subscribe((hashMap: Map<string, boolean>) => this.secretWordMap = hashMap);
     this.messageState.subscribe((modalText: string) => this.modalMessage = modalText);
@@ -54,7 +52,7 @@ export class GamePageComponent implements OnDestroy {
 
   setHiddenDisplayForCharacters = (word: string): Map<string, boolean> => {
     const map = new Map<string, boolean>();
-    // crée un tableau de chaque caractere
+
     word.split('').forEach((currentCharacter) => {
       map.set(currentCharacter, false);
     });
@@ -63,12 +61,13 @@ export class GamePageComponent implements OnDestroy {
 
   setDisplayForOneCharacter = (character: string, map: Map<string, boolean>, value: boolean): Map<string, boolean> => {
     const newSecretWordMap = map;
+
     return newSecretWordMap.set(character, value);
   }
 
   tryThisCharacter = (characterToTry: string, map: Map<string, boolean>): void => {
     return this.isCharacterInMap(characterToTry, map) ?
-    this.luckyTry(characterToTry, map) : this.badTry();
+      this.luckyTry(characterToTry, map) : this.badTry();
   }
 
   isCharacterInMap = (character: string, map: Map<string, boolean>): boolean => {
@@ -90,15 +89,12 @@ export class GamePageComponent implements OnDestroy {
   }
 
   checkForEndOfGame = (map: Map<string, boolean>): boolean => {
-    // construit un array des values de la map
     const arrayMapValue = Array.from(map.values());
-    // construit un nouveau tableau avec uniquement les value a true
     const arrayTrueValue = arrayMapValue.filter((value: boolean) => value === true);
 
     return arrayTrueValue.length === arrayMapValue.length;
   }
 
-  // not a pure function because we change a global variables
   badTry = (): void => {
     if (this.tryRemaining !== 0) {
       this.tryRemaining -= 1;
@@ -142,15 +138,12 @@ export class GamePageComponent implements OnDestroy {
   resetGame = () => {
     location.reload();
     // TODO real reset game
-    /* const newWordsArray = this.secretWordsArray.filter((word) => word !== this.currentGameWord);
-    this.getRandomWord(newWordsArray); */
   }
 
   // drawPendu = (tryRemaining: number) => {
   //   const canvasZone = document.getElementById('myCanvas');
   //   if (canvasZone.getContext) {
   //     const ctx = canvasZone.getContext('2d');
-
   //     switch (tryRemaining) {
   //       case 10:
   //         ctx.beginPath();
