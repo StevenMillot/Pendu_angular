@@ -5,7 +5,7 @@
 
   <app-modal
     *ngIf=message
-    [modalText]=messageState>
+    [message]=message>
   </app-modal>
 
   <div class="card-container">
@@ -41,10 +41,10 @@
   </form>
 
   <p class="try-remaining">
-    Il vous reste {{tryRemaining}} chance{{plurialTry}}.
+    Il vous reste {{tryRemaining}} chance{{pluralTry}}.
   </p>
 
   <canvas id="myCanvas" width="300" height="300">
-      Votre navigateurs ne supporte pas encore canvas.
+    Votre navigateurs ne supporte pas encore canvas.
   </canvas>
 </div><!-- /.game-page-container -->

@@ -19,18 +19,20 @@ export class GamePageComponent implements OnDestroy {
   LONG_DISPLAY_DURATION = 5000;
 
   // Observable/Observeur => variable qui peux changer ds le temps.
+  // reword subjectState
   subjectEtat = new BehaviorSubject(new Map<string, boolean>());
   messageState = new BehaviorSubject('');
+  pluralTryState = new BehaviorSubject('s');
 
   tryRemaining = this.NUMBER_OF_CHANCE;
   currentGameWord: string;
   message: string;
   username: string;
+  pluralTry: string;
   mapState = new Map<string, boolean>(); // find all référence ^^ c'est ca et t'a la meme chose pour les occurence
   routeSubscription: Subscription;
   secretWordsArray = ['javascript', 'php', 'java', 'ruby', 'sql', 'pyton', 'lorem'];
   canvasZone = document.getElementById('myCanvas');
-  plurialTry = 's'
 
   constructor(private activatedRoute: ActivatedRoute) {
     this.routeSubscription = this.activatedRoute.queryParams.subscribe(params => {
@@ -44,8 +46,8 @@ export class GamePageComponent implements OnDestroy {
     // permet de sousrire a notre observable, le surveille et retourne les changements
     // a chaque changement de valeur (chaque nouveau .next), je stoque la valeur actuel dans mapState
     this.subjectEtat.subscribe((hashMap: Map<string, boolean>) => this.mapState = hashMap);
-
     this.messageState.subscribe((modalText: string) => this.message = modalText);
+    this.pluralTryState.subscribe((text: string) => this.pluralTry = text);
   }
 
   ngOnDestroy() {
@@ -78,14 +80,14 @@ export class GamePageComponent implements OnDestroy {
 
   tryThisCharacter = (characterToTry: string, map: Map<string, boolean>): void => {
     return this.isCharacterInMap(characterToTry, map) ?
-    this.luckyTry(characterToTry, map, this.messageState) : this.badTry(this.messageState);
+    this.luckyTry(characterToTry, map) : this.badTry();
   }
 
-  luckyTry = (characterToTry: string, map: Map<string, boolean>, message$: BehaviorSubject<string>): void => {
+  luckyTry = (characterToTry: string, map: Map<string, boolean>): void => {
     this.setDisplayForOneCharacter(characterToTry, map, true);
     if (this.checkForEndOfGame(map)) {
-      message$.next('Cool, tu as gagné!  ==> Chargement d\'une nouvelle partie...');
-      this.timeout(message$, 100000000000, true);
+      this.messageState.next('Cool, tu as gagné!  ==> Chargement d\'une nouvelle partie...');
+      this.timeout(this.LONG_DISPLAY_DURATION, true);
     }
   }
 
@@ -99,42 +101,45 @@ export class GamePageComponent implements OnDestroy {
     }
 
   // not a pure function because we change a global variables
-  badTry = (message$: BehaviorSubject<string>): void => {
+  badTry = (): void => {
     if (this.tryRemaining !== 0) {
       this.tryRemaining -= 1;
-      this.drawPendu(this.tryRemaining, this.canvasZone);
-      this.modalInjector(this.tryRemaining, message$);
+      // this.drawPendu(this.tryRemaining, this.canvasZone);
+      this.modalInjector(this.tryRemaining);
     }
   }
 
-  modalInjector = (chanceNumber: number, message$: BehaviorSubject<string>): void => {
+  modalInjector = (chanceNumber: number): void => {
     switch (chanceNumber) {
       case 1:
-        this.plurialTry = '';
-        message$.next('Erreur ==> Plus qu\'un essai :-/');
-        this.timeout(message$, this.SHORT_DISPLAY_DURATION, false);
+        this.messageState.next('Erreur ==> Plus qu\'un essai !');
+        this.timeout(this.LONG_DISPLAY_DURATION, false);
+        this.setPluralTry();
         break;
       case 0:
-        message$.next('GameOver!  ==> Chargement d\'une nouvelle partie...');
-        this.timeout(message$, this.LONG_DISPLAY_DURATION, true);
+        this.messageState.next('GameOver!  ==> Chargement d\'une nouvelle partie...');
+        this.timeout(this.LONG_DISPLAY_DURATION, true);
+        this.setPluralTry();
         break;
       default:
-        message$.next('Erreur');
-        this.timeout(message$, this.SHORT_DISPLAY_DURATION, false);
+        this.messageState.next('Erreur');
+        this.timeout(this.SHORT_DISPLAY_DURATION, false);
     }
   }
 
-  // timeout = (message$) => setTimeout(message$.next(''), 30000);
-  timeout = async (message$: BehaviorSubject<string>, duration, reloadGame: boolean) => {
+  setPluralTry = () => this.pluralTryState.next('');
+
+  // timeout = (this.messageState) => setTimeout(this.messageState.next(''), 30000);
+  timeout = async (duration: number, reloadGame: boolean) => {
     await this.delay(duration);
-    message$.next('');
+    this.messageState.next('');
     if (reloadGame) {
       this.resetGame();
     }
   }
 
   delay = (ms: number) => {
-    return new Promise( resolve => setTimeout(resolve, ms) );
+    return new Promise( resolve => setTimeout(resolve, 1000000000) );
   }
 
   resetGame = () => {
@@ -144,7 +149,7 @@ export class GamePageComponent implements OnDestroy {
     this.getRandomWord(newWordsArray); */
   }
 
-  drawPendu = (tryRemaining: number, canvasZone) => {
+  /* drawPendu = (tryRemaining: number, canvasZone) => {
 /*     var canvas = document.getElementById('myCanvas');
     if (canvas.getContext) {
       var ctx = canvas.getContext('2d');
@@ -156,7 +161,7 @@ export class GamePageComponent implements OnDestroy {
       ctx.clearRect(60, 60, 120, 120);
       ctx.strokeRect(90, 90, 80, 80);
     } */
-    switch (tryRemaining) {
+    /* switch (tryRemaining) {
       case 10:
         canvasZone.beginPath(); // On démarre un nouveau tracé
         canvasZone.lineCap = 'round';
@@ -231,18 +236,14 @@ export class GamePageComponent implements OnDestroy {
         canvasZone.fill();
         break;
 
-/*       default:
-        canvasZone.clearRect(0, 0, 300, 300); */
+       default:
+        canvasZone.clearRect(0, 0, 300, 300);
     }
-  }
+  } */
 }
 
 
 // commentaire automatique
 // documentation
-// remove inline css (rotate card etc..)
-// liste des caractère deja entrés
-// il vous reste X chance(S)
-// remove <BR>
+// TODO liste des caractère deja entrés
 // facto mixin and variable css
-// re order css

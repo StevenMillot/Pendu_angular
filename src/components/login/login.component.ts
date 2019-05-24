@@ -10,12 +10,10 @@ export class LoginComponent implements OnInit { // à déclarer dans le app-modu
 
   username = '';
 
-  constructor(private router: Router) { // injection de dépendance
+  // Injection de dépendance
+  constructor(private router: Router) {}
 
-  }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   goToGamePage = (username: string) => {
     this.router.navigateByUrl(`/game?username=${username}`);

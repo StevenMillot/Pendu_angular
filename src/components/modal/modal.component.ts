@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-modal',
@@ -8,14 +7,10 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ModalComponent implements OnInit {
 
-  // récupère la props passer par le parent
-  @Input() modalText = new BehaviorSubject('');
+  @Input() message: string;
 
   constructor() {}
 
   ngOnInit() {
   }
-
-
-
 }

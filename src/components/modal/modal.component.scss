@@ -1,5 +1,12 @@
-.modal {
+.modal-container {
+    display: flex;
+    justify-content: center;
     position: absolute;
-    text-align: center;
-    top: 50px;
+    top: 230px;
+
+    .modal {
+        font-size: 24px;
+        position: absolute;
+        width: max-content;
+    }
 }
