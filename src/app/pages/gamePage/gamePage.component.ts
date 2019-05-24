@@ -3,10 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription} from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 
-// type positiveNumber = 0 | 1 | 2 | 3 | 10;
-
-// Décorateur angular => attachent des types de métadonnées spécifiques à des classes
-// de sorte que le système sache ce que ces classes signifient et comment elles devraient fonctionner.
 @Component({
   selector: 'app-gamePage',
   templateUrl: './gamePage.component.html',
@@ -18,18 +14,18 @@ export class GamePageComponent implements OnDestroy {
   SHORT_DISPLAY_DURATION = 3000;
   LONG_DISPLAY_DURATION = 5000;
 
-  // Observable/Observeur => variable qui peux changer ds le temps.
   cardsState = new BehaviorSubject(new Map<string, boolean>());
   messageState = new BehaviorSubject('');
   pluralTryState = new BehaviorSubject('s');
 
-  tryRemaining = this.NUMBER_OF_CHANCE;
   currentGameWord: string;
   modalMessage: string;
   username: string;
   pluralTry: string;
-  secretWordMap = new Map<string, boolean>();
   routeSubscription: Subscription;
+
+  secretWordMap = new Map<string, boolean>();
+  tryRemaining = this.NUMBER_OF_CHANCE;
   secretWordsArray = ['javascript', 'php', 'java', 'ruby', 'sql', 'pyton', 'lorem', 'basic', 'c++'];
 
   constructor(private activatedRoute: ActivatedRoute) {
