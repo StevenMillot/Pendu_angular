@@ -4,7 +4,7 @@ import { Subscription} from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
-  selector: 'app-gamePage',
+  selector: 'app-game-page',
   templateUrl: './gamePage.component.html',
   styleUrls: ['./gamePage.component.scss']
 })
@@ -228,12 +228,10 @@ export class GamePageComponent implements OnDestroy {
 
 
 // commentaire automatique
+
 // documentation
+// you need to use XXX version of node , for that you can white : nvm userInfo
 
 // TODO liste des caractère deja entrés
 // facto mixin and variable css
 // rework validation button for 1 character
-
-
-
-// you need to use XXX version of node , for that you can white : nvm userInfo
