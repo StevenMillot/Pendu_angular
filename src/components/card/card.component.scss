@@ -1,0 +1,40 @@
+.card{
+  color: white;
+  font-size: 30px;
+  height:100px;
+  margin: 2px;
+  perspective:1000px;
+  position:relative;
+  width:100px;
+
+  &__side{
+    align-items:center;
+    backface-visibility: hidden;
+    border-radius:5px;
+    display:flex;
+    height:100%;
+    justify-content:center;
+    left: 0;
+    position:absolute;
+    top: 0;
+    transition:all .8s ease;
+    width:100%;
+
+    &--front{
+      background-color:#00648e;
+    }
+
+    &--back{
+      background-color:#6b9c61;
+      transform: rotateY(180deg);
+    }
+  }
+
+  &__side--front &.reveal-card {
+    transform: rotateY(-180deg);
+  }
+  &__side--back &.reveal-card{
+    transform: rotateY(0);
+  }
+
+}

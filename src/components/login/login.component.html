@@ -1,30 +1,32 @@
-<h1 style="text-align: center">Je suis {{username}}</h1>
+<div class="login-page-container">
+  <h1 class="welcome-title">Bienvenue sur le jeu du Pendu</h1>
 
-<form #myForm="ngForm" class="user-form">
-  <label for="pseudo">Quel est votre pseudo ?</label>
+  <form #myForm="ngForm" class="user-form">
+    <label for="pseudo">Quel est votre pseudo ?</label>
 
-  <br><br>
+    <br><br>
 
-  <input
-    type="text"
-    id="pseudo"
-    name="username"
-    title="3 caractères minimum requis"
-    required
-    minlength="3"
-    maxlength="20"
-    size="20"
-    placeholder='Votre pseudo ici'
-    [(ngModel)]=username>
+    <input
+      type="text"
+      id="pseudo"
+      name="username"
+      title="3 caractères minimum requis"
+      required
+      minlength="3"
+      maxlength="20"
+      size="20"
+      placeholder='Votre pseudo ici'
+      [(ngModel)]=username>
 
-  <span class="validity"></span>
+    <span class="validity"></span>
 
-  <br><br>
+    <br><br>
 
-  <button
-    type="submit"
-    [disabled]="!myForm.form.valid"
-    (click)="goToGamePage(username)">
-    Valider
-  </button>
-</form>
+    <button
+      type="submit"
+      [disabled]="!myForm.form.valid"
+      (click)="goToGamePage(username)">
+      Valider
+    </button>
+  </form>
+</div><!-- /.login-page-container -->

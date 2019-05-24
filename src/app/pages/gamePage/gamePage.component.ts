@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Component, OnDestroy} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription} from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
@@ -14,7 +14,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 
 export class GamePageComponent implements OnDestroy {
-  NUMBER_OF_CHANCE = 3;
+  NUMBER_OF_CHANCE = 10;
   SHORT_DISPLAY_DURATION = 3000;
   LONG_DISPLAY_DURATION = 5000;
 
@@ -22,13 +22,15 @@ export class GamePageComponent implements OnDestroy {
   subjectEtat = new BehaviorSubject(new Map<string, boolean>());
   messageState = new BehaviorSubject('');
 
-  chanceLeft = this.NUMBER_OF_CHANCE;
+  tryRemaining = this.NUMBER_OF_CHANCE;
   currentGameWord: string;
   message: string;
   username: string;
   mapState = new Map<string, boolean>(); // find all référence ^^ c'est ca et t'a la meme chose pour les occurence
   routeSubscription: Subscription;
   secretWordsArray = ['javascript', 'php', 'java', 'ruby', 'sql', 'pyton', 'lorem'];
+  canvasZone = document.getElementById('myCanvas');
+  plurialTry = 's'
 
   constructor(private activatedRoute: ActivatedRoute) {
     this.routeSubscription = this.activatedRoute.queryParams.subscribe(params => {
@@ -79,23 +81,11 @@ export class GamePageComponent implements OnDestroy {
     this.luckyTry(characterToTry, map, this.messageState) : this.badTry(this.messageState);
   }
 
-  // not a pure function because we change a global variables
-  badTry = (message$: BehaviorSubject<string>): void => {
-    if (this.chanceLeft !== 0) {
-      this.chanceLeft -= 1;
-      this.modalInjector(this.chanceLeft, this.messageState);
-      if (!message$) {
-        message$.next('Erreur');
-        this.timeout(message$, this.SHORT_DISPLAY_DURATION, false);
-      }
-    }
-  }
-
   luckyTry = (characterToTry: string, map: Map<string, boolean>, message$: BehaviorSubject<string>): void => {
     this.setDisplayForOneCharacter(characterToTry, map, true);
     if (this.checkForEndOfGame(map)) {
       message$.next('Cool, tu as gagné!  ==> Chargement d\'une nouvelle partie...');
-      this.timeout(message$, this.LONG_DISPLAY_DURATION, true);
+      this.timeout(message$, 100000000000, true);
     }
   }
 
@@ -108,9 +98,19 @@ export class GamePageComponent implements OnDestroy {
       return arrayTrueValue.length === arrayMapValue.length;
     }
 
+  // not a pure function because we change a global variables
+  badTry = (message$: BehaviorSubject<string>): void => {
+    if (this.tryRemaining !== 0) {
+      this.tryRemaining -= 1;
+      this.drawPendu(this.tryRemaining, this.canvasZone);
+      this.modalInjector(this.tryRemaining, message$);
+    }
+  }
+
   modalInjector = (chanceNumber: number, message$: BehaviorSubject<string>): void => {
     switch (chanceNumber) {
       case 1:
+        this.plurialTry = '';
         message$.next('Erreur ==> Plus qu\'un essai :-/');
         this.timeout(message$, this.SHORT_DISPLAY_DURATION, false);
         break;
@@ -118,6 +118,9 @@ export class GamePageComponent implements OnDestroy {
         message$.next('GameOver!  ==> Chargement d\'une nouvelle partie...');
         this.timeout(message$, this.LONG_DISPLAY_DURATION, true);
         break;
+      default:
+        message$.next('Erreur');
+        this.timeout(message$, this.SHORT_DISPLAY_DURATION, false);
     }
   }
 
@@ -136,12 +139,110 @@ export class GamePageComponent implements OnDestroy {
 
   resetGame = () => {
     location.reload();
-/*     const newWordsArray = this.secretWordsArray.filter((word) => word !== this.currentGameWord);
+    // TODO real reset game
+    /* const newWordsArray = this.secretWordsArray.filter((word) => word !== this.currentGameWord);
     this.getRandomWord(newWordsArray); */
   }
+
+  drawPendu = (tryRemaining: number, canvasZone) => {
+/*     var canvas = document.getElementById('myCanvas');
+    if (canvas.getContext) {
+      var ctx = canvas.getContext('2d');
+
+      ctx.fillStyle = "#D74022";
+      ctx.fillRect(25, 25, 150, 150);
+
+      ctx.fillStyle = "rgba(0,0,0,0.5)";
+      ctx.clearRect(60, 60, 120, 120);
+      ctx.strokeRect(90, 90, 80, 80);
+    } */
+    switch (tryRemaining) {
+      case 10:
+        canvasZone.beginPath(); // On démarre un nouveau tracé
+        canvasZone.lineCap = 'round';
+        canvasZone.lineWidth = "10";
+        canvasZone.lineJoin = 'round';
+        canvasZone.strokeStyle = "rgb(23, 145, 167)";
+        canvasZone.moveTo(35, 295);
+        canvasZone.lineTo(5, 295);
+        canvasZone.stroke();
+        break;
+      case 9:
+        canvasZone.moveTo(20, 295);
+        canvasZone.lineTo(20, 5);
+        canvasZone.stroke();
+        break;
+      case 8:
+        canvasZone.lineTo(200, 5);
+        canvasZone.stroke();
+        break;
+      case 7:
+        canvasZone.lineTo(200, 50);
+        canvasZone.stroke();
+        break;
+      case 6:
+        canvasZone.moveTo(20, 50);
+        canvasZone.lineTo(70, 5);
+        canvasZone.stroke();
+        break;
+      case 5:
+        canvasZone.beginPath();
+        canvasZone.fillStyle = "red";
+        canvasZone.arc(200, 50, 20, 0, Math.PI * 2);
+        canvasZone.fill();
+        break;
+      case 4:
+        canvasZone.beginPath();
+        canvasZone.strokeStyle = "red";
+        canvasZone.moveTo(200, 50);
+        canvasZone.lineTo(200, 150);
+        canvasZone.stroke();
+        break;
+      case 3:
+        canvasZone.beginPath();
+        canvasZone.moveTo(200, 80);
+        canvasZone.lineTo(160, 110);
+        canvasZone.stroke();
+        break;
+      case 2:
+        canvasZone.beginPath();
+        canvasZone.moveTo(200, 80);
+        canvasZone.lineTo(240, 110);
+        canvasZone.stroke();
+        break;
+      case 1:
+        canvasZone.beginPath();
+        canvasZone.moveTo(200, 150);
+        canvasZone.lineTo(180, 200);
+        canvasZone.stroke();
+        break;
+      case 0:
+        canvasZone.beginPath();
+        canvasZone.moveTo(200, 150);
+        canvasZone.lineTo(220, 200);
+        canvasZone.stroke();
+        canvasZone.beginPath();
+        canvasZone.fillStyle = "rgb(23, 145, 167)";
+        canvasZone.arc(200, 62, 16, 0, Math.PI * 2);
+        canvasZone.fill();
+        canvasZone.beginPath();
+        canvasZone.fillStyle = "red";
+        canvasZone.arc(200, 50, 20, 0, Math.PI * 2);
+        canvasZone.fill();
+        break;
+
+/*       default:
+        canvasZone.clearRect(0, 0, 300, 300); */
+    }
+  }
 }
+
 
 // commentaire automatique
 // documentation
 // remove inline css (rotate card etc..)
 // liste des caractère deja entrés
+// il vous reste X chance(S)
+// remove <BR>
+// facto mixin and variable css
+// re order css

@@ -1,47 +1,50 @@
-<p>
-  Bienvenue {{username}}
-</p>
+<div class="game-page-container">
+  <h1 class="username">
+    Bienvenue {{username}}
+  </h1>
 
-<app-modal
-  *ngIf=message
-  [modalText]=messageState>
-</app-modal>
+  <app-modal
+    *ngIf=message
+    [modalText]=messageState>
+  </app-modal>
 
-<div class="form-container">
-  <app-card
-    *ngFor="let character of currentGameWord.split('')"
-    [character]=character
-    [etat]=subjectEtat
-    style='height: 100px; width: 100px; background-color: red; border: black 1px solid; padding: 5px; font-size: 20px; border-radius: 15px;'>
-  </app-card>
-</div><!-- /.form-container -->
+  <div class="card-container">
+    <app-card
+      *ngFor="let character of currentGameWord.split('')"
+      [character]=character
+      [etat]=subjectEtat>
+    </app-card>
+  </div><!-- /.form-container -->
 
-<br><br>
+  <form #answerForm="ngForm" class="answer-form">
+    <div class="input-answer">
+      <label for="answer">Entrer le caractère de votre choix :</label>
+      <input
+        type="text"
+        placeholder="Ici"
+        minlength="1"
+        maxlength="1"
+        size="2"
+        required
+        title="Un seul caractère possible"
+        (change)=tryThisCharacter($event.target.value.toUpperCase(),this.mapState)>
+    </div><!-- /.input-answer -->
 
-<p>
-  Il vous reste {{chanceLeft}} chance.
-</p>
+    <!-- Refact disable button -->
+    <button
+      class="submit-button"
+      type="submit"
+      onclick="this.form.reset();"
+      [disabled]="!answerForm.form.valid">
+      Valider
+    </button>
+  </form>
 
-<form #answerForm="ngForm" class="answer-form">
-  <label for="answer">Essayer un caractère</label>
-  <br>
-  <input
-    type="text"
-    placeholder="Ici"
-    minlength="1"
-    maxlength="1"
-    required
-    title="1 caractère maximum"
-    (change)=tryThisCharacter($event.target.value.toUpperCase(),this.mapState)>
+  <p class="try-remaining">
+    Il vous reste {{tryRemaining}} chance{{plurialTry}}.
+  </p>
 
-  <br><br>
-
-  <!-- Refact disable button -->
-  <button
-    type="submit"
-    onclick="this.form.reset();"
-    [disabled]="!answerForm.form.valid">
-    Valider
-  </button>
-</form>
-
+  <canvas id="myCanvas" width="300" height="300">
+      Votre navigateurs ne supporte pas encore canvas.
+  </canvas>
+</div><!-- /.game-page-container -->

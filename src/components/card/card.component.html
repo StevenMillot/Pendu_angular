@@ -1,1 +1,15 @@
-<div *ngIf="(etat | async)?.get(character)">{{character}}</div> <!-- renvoie la map State, du caractère -->
+<div class="row">
+  <div
+    class="card"
+    [class.reveal-card]="(etat | async)">
+    <div class="card__side card__side--front">
+      ?
+    </div>
+    <div
+      class="card__side card__side--back">
+      {{character}}
+    </div>
+  </div>
+</div>
+
+

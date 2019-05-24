@@ -1,17 +1,24 @@
-.user-form {
-    text-align: center;
+.login-page-container {
     margin-top: 50vh;
+    text-align: center;
     transform: translateY(-50%);
+}
 
+.welcome-title {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.user-form {
     input:invalid+span:after {
-        position: absolute;
         content: '✖';
         padding-left: 5px;
+        position: absolute;
     }
 
     input:valid+span:after {
-        position: absolute;
         content: '✓';
         padding-left: 5px;
+        position: absolute;
     }
 }
