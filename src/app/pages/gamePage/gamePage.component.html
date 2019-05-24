@@ -16,16 +16,18 @@
     </app-card>
   </div><!-- /.form-container -->
 
-  <form #answerForm="ngForm" class="answer-form">
+  <form
+    #myAnswerForm="ngForm"
+    class="answer-form">
     <div class="input-answer">
       <label for="answer">Entrer le caractère de votre choix :</label>
       <input
         type="text"
         placeholder="Ici"
+        required
         minlength="1"
         maxlength="1"
         size="2"
-        required
         title="Un seul caractère possible"
         (change)=tryThisCharacter($event.target.value.toUpperCase(),this.secretWordMap)>
     </div><!-- /.input-answer -->
@@ -34,7 +36,7 @@
       class="submit-button"
       type="submit"
       onclick="this.form.reset();"
-      [disabled]="!answerForm.input.$valid">
+      [disabled]="!myAnswerForm.form.valid">
       Valider
     </button>
   </form>

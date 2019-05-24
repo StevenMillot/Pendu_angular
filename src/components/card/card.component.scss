@@ -30,14 +30,10 @@
     }
   }
 
-  &:hover &__side--front {
+  .reveal-card &__side--front {
     transform: rotateY(-180deg);
   }
-  &:hover &__side--back  {
+  .reveal-card &__side--back  {
     transform: rotateY(0);
   }
-}
-
-.reveal-card {
-  color: red;
 }
