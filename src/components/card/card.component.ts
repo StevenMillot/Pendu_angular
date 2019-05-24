@@ -11,11 +11,10 @@ import { BehaviorSubject } from 'rxjs';
 export class CardComponent implements OnInit {
 
   @Input() character: string;
-  @Input() etat = new BehaviorSubject(false);
+  @Input() state: boolean;
 
   constructor() { }
 
   ngOnInit() {
   }
-
 }

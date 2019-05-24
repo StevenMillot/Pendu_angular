@@ -1,4 +1,4 @@
-.card{
+.card {
   color: white;
   font-size: 30px;
   height:100px;
@@ -7,7 +7,7 @@
   position:relative;
   width:100px;
 
-  &__side{
+  &__side {
     align-items:center;
     backface-visibility: hidden;
     border-radius:5px;
@@ -20,21 +20,24 @@
     transition:all .8s ease;
     width:100%;
 
-    &--front{
+    &--front {
       background-color:#00648e;
     }
 
-    &--back{
+    &--back {
       background-color:#6b9c61;
       transform: rotateY(180deg);
     }
   }
 
-  .reveal-card {
+  &:hover &__side--front {
     transform: rotateY(-180deg);
   }
-  .reveal-card{
+  &:hover &__side--back  {
     transform: rotateY(0);
   }
+}
 
+.reveal-card {
+  color: red;
 }

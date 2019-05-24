@@ -19,40 +19,37 @@ export class GamePageComponent implements OnDestroy {
   LONG_DISPLAY_DURATION = 5000;
 
   // Observable/Observeur => variable qui peux changer ds le temps.
-  // reword subjectState
-  subjectEtat = new BehaviorSubject(new Map<string, boolean>());
+  cardsState = new BehaviorSubject(new Map<string, boolean>());
   messageState = new BehaviorSubject('');
   pluralTryState = new BehaviorSubject('s');
 
   tryRemaining = this.NUMBER_OF_CHANCE;
   currentGameWord: string;
-  message: string;
+  modalMessage: string;
   username: string;
   pluralTry: string;
-  mapState = new Map<string, boolean>(); // find all référence ^^ c'est ca et t'a la meme chose pour les occurence
+  secretWordMap = new Map<string, boolean>();
   routeSubscription: Subscription;
   secretWordsArray = ['javascript', 'php', 'java', 'ruby', 'sql', 'pyton', 'lorem'];
   canvasZone = document.getElementById('myCanvas');
 
   constructor(private activatedRoute: ActivatedRoute) {
-    this.routeSubscription = this.activatedRoute.queryParams.subscribe(params => {
-      this.username = params.username;
-    });
-    this.currentGameWord = this.getRandomWord(this.secretWordsArray).toUpperCase();
-    this.mapState = this.setHiddenDisplayForCharacters(this.currentGameWord);
-    // .next => push (crée un commit)
-    this.subjectEtat.next(this.setHiddenDisplayForCharacters(this.currentGameWord));
-
     // permet de sousrire a notre observable, le surveille et retourne les changements
-    // a chaque changement de valeur (chaque nouveau .next), je stoque la valeur actuel dans mapState
-    this.subjectEtat.subscribe((hashMap: Map<string, boolean>) => this.mapState = hashMap);
-    this.messageState.subscribe((modalText: string) => this.message = modalText);
+    // a chaque changement de valeur (chaque nouveau .next), je stoque la valeur actuel dans secretWordMap
+    this.routeSubscription = this.activatedRoute.queryParams.subscribe(params => this.username = params.username);
+    this.cardsState.subscribe((hashMap: Map<string, boolean>) => this.secretWordMap = hashMap);
+    this.messageState.subscribe((modalText: string) => this.modalMessage = modalText);
     this.pluralTryState.subscribe((text: string) => this.pluralTry = text);
+
+    this.currentGameWord = this.getRandomWord(this.secretWordsArray).toUpperCase();
+    this.secretWordMap = this.setHiddenDisplayForCharacters(this.currentGameWord);
+    this.cardsState.next(this.setHiddenDisplayForCharacters(this.currentGameWord));
   }
 
   ngOnDestroy() {
     this.routeSubscription.unsubscribe();
-    this.subjectEtat.unsubscribe();
+    this.pluralTryState.unsubscribe();
+    this.cardsState.unsubscribe();
     this.messageState.unsubscribe();
   }
 
@@ -70,12 +67,8 @@ export class GamePageComponent implements OnDestroy {
   }
 
   setDisplayForOneCharacter = (character: string, map: Map<string, boolean>, value: boolean): Map<string, boolean> => {
-    const newMapState = map;
-    return newMapState.set(character, value);
-  }
-
-  isCharacterInMap = (character: string, map: Map<string, boolean>): boolean => {
-    return map.get(character) === undefined ? false : true;
+    const newSecretWordMap = map;
+    return newSecretWordMap.set(character, value);
   }
 
   tryThisCharacter = (characterToTry: string, map: Map<string, boolean>): void => {
@@ -83,6 +76,16 @@ export class GamePageComponent implements OnDestroy {
     this.luckyTry(characterToTry, map) : this.badTry();
   }
 
+  isCharacterInMap = (character: string, map: Map<string, boolean>): boolean => {
+    return map.get(character) === undefined ? false : true;
+  }
+
+  /**
+   * Description de la fonction
+   * @param characterToTry : string => caractère rentré par l'utilisateur
+   * @param map : Map<string, boolean> =>
+   * @return void
+   */
   luckyTry = (characterToTry: string, map: Map<string, boolean>): void => {
     this.setDisplayForOneCharacter(characterToTry, map, true);
     if (this.checkForEndOfGame(map)) {
@@ -91,14 +94,14 @@ export class GamePageComponent implements OnDestroy {
     }
   }
 
-    checkForEndOfGame = (map: Map<string, boolean>): boolean => {
-      // construit un array des values de la map
-      const arrayMapValue = Array.from(map.values());
-      // construit un nouveau tableau avec uniquement les value a true
-      const arrayTrueValue = arrayMapValue.filter((value: boolean) => value === true);
+  checkForEndOfGame = (map: Map<string, boolean>): boolean => {
+    // construit un array des values de la map
+    const arrayMapValue = Array.from(map.values());
+    // construit un nouveau tableau avec uniquement les value a true
+    const arrayTrueValue = arrayMapValue.filter((value: boolean) => value === true);
 
-      return arrayTrueValue.length === arrayMapValue.length;
-    }
+    return arrayTrueValue.length === arrayMapValue.length;
+  }
 
   // not a pure function because we change a global variables
   badTry = (): void => {
@@ -247,3 +250,8 @@ export class GamePageComponent implements OnDestroy {
 // documentation
 // TODO liste des caractère deja entrés
 // facto mixin and variable css
+// rework validation button for 1 character
+
+
+
+// you need to use XXX version of node , for that you can white : nvm userInfo

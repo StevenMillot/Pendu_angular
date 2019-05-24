@@ -4,15 +4,15 @@
   </h1>
 
   <app-modal
-    *ngIf=message
-    [message]=message>
+    *ngIf=modalMessage
+    [message]=modalMessage>
   </app-modal>
 
   <div class="card-container">
     <app-card
       *ngFor="let character of currentGameWord.split('')"
       [character]=character
-      [etat]=subjectEtat>
+      [state]=secretWordMap.get(character)>
     </app-card>
   </div><!-- /.form-container -->
 
@@ -27,15 +27,14 @@
         size="2"
         required
         title="Un seul caractère possible"
-        (change)=tryThisCharacter($event.target.value.toUpperCase(),this.mapState)>
+        (change)=tryThisCharacter($event.target.value.toUpperCase(),this.secretWordMap)>
     </div><!-- /.input-answer -->
 
-    <!-- Refact disable button -->
     <button
       class="submit-button"
       type="submit"
       onclick="this.form.reset();"
-      [disabled]="!answerForm.form.valid">
+      [disabled]="!answerForm.input.$valid">
       Valider
     </button>
   </form>
