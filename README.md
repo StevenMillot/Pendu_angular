@@ -6,7 +6,7 @@ Le Pendu est un jeu consistant à trouver un mot en devinant quelles sont les le
 
 Une fois votre pseudo enregistré, le jeu génère un mot caché aléatoirement.
 Le joueur doit deviner le mot en proposant à l'interface des caractères un part un.
-Lorsque vous trouvez un bon caractère, toutes les occurrences présentes dans le mot sont révélées et aucune essais ne vous est retirée.
+Lorsque vous trouvez un bon caractère, toutes les occurrences présentes dans le mot sont révélées et aucune essais ne vous est retiré.
 Vous disposez de 10 essais pour trouver le mot.
 
 Le jeu se termine lorsque le joueur trouve le mot caché, ou à utilisé toutes ses chances.
