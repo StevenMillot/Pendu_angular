@@ -15,8 +15,8 @@ Après un message de félicitation, ou non, le jeu ce relance directement sur un
 
 # Installation
 
-La version actuel d'Angular necessite d'avoir [Node.js](https://nodejs.org/fr/) en version **8.9** au minimum.
-Si vous disposer de [Node Version Manager](https://github.com/nvm-sh/nvm/blob/master/README.md) sur votre machine, la commande `nvm use` vous permet de changer rapidement de version pour passer à celle minimum requise.
+La version actuelle d'Angular necessite d'avoir [Node.js](https://nodejs.org/fr/) en version **8.9** au minimum.
+Si vous disposez de [Node Version Manager](https://github.com/nvm-sh/nvm/blob/master/README.md) sur votre machine, la commande `nvm use` vous permet de changer rapidement de version pour passer à celle minimum requise.
 
 La commande `npm install` vous permettra d'installer toutes les dépendances dont le projet à besoin pour fonctionner.
 
