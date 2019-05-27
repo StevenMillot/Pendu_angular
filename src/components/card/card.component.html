@@ -1,0 +1,16 @@
+<div class="row">
+  <div
+    [ngClass]="{'reveal-card':state === true}"
+    class="card">
+    <div
+      [ngClass]="{'reveal-card':state === true}"
+      class="card__side card__side--front">
+      ?
+    </div>
+    <div
+      [ngClass]="{'reveal-card':state === true}"
+      class="card__side card__side--back">
+      {{character}}
+    </div>
+  </div>
+</div>

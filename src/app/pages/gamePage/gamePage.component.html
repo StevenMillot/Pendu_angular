@@ -1,0 +1,51 @@
+<div class="game-page-container">
+  <h1 class="username">
+    Bienvenue {{username}}
+  </h1>
+
+  <app-modal
+    *ngIf=modalMessage
+    [message]=modalMessage>
+  </app-modal>
+
+  <div class="card-container">
+    <app-card
+      *ngFor="let character of currentGameWord.split('')"
+      [character]=character
+      [state]=secretWordMap.get(character)>
+    </app-card>
+  </div><!-- /.form-container -->
+
+  <form
+    #myAnswerForm="ngForm"
+    class="answer-form">
+    <div class="input-answer">
+      <label for="answer">Entrer le caractère de votre choix :</label>
+      <input
+        type="text"
+        placeholder="Ici"
+        required
+        minlength="1"
+        maxlength="1"
+        size="2"
+        title="Un seul caractère possible"
+        (change)=tryThisCharacter($event.target.value.toUpperCase(),this.secretWordMap)>
+    </div><!-- /.input-answer -->
+
+    <button
+      class="submit-button"
+      type="submit"
+      onclick="this.form.reset();"
+      [disabled]="!myAnswerForm.form.valid">
+      Valider
+    </button>
+  </form>
+
+  <p class="try-remaining">
+    Il vous reste {{tryRemaining}} chance{{pluralTry}} sur {{NUMBER_OF_CHANCE}}.
+  </p>
+
+  <canvas id="myCanvas" width="300" height="300">
+    Votre navigateurs ne supporte pas encore canvas.
+  </canvas>
+</div><!-- /.game-page-container -->
