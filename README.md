@@ -2,7 +2,7 @@
 
 Le Pendu est un jeu consistant à trouver un mot en devinant quelles sont les lettres qui le composent.
 
-## Déroulement
+### Déroulement
 
 Une fois votre pseudo enregistré, le jeu génère un mot caché aléatoirement.
 Le joueur doit deviner le mot en proposant à l'interface des caractères un part un.
@@ -20,26 +20,13 @@ Si vous disposez de [Node Version Manager](https://github.com/nvm-sh/nvm/blob/ma
 
 La commande `npm install` vous permettra d'installer toutes les dépendances dont le projet à besoin pour fonctionner.
 
-## Serveur de développement
+### Serveur de développement
 
 La commande `ng serve` permet de créer un serveur local sur le port 4200.
 Naviguez via l'adresse: `http://localhost:4200/`.
 L'application de recharge automatiquement lorsque des changements sur le code source sont enregistrés.
 
-# Installation
-
-La version actuelle d'Angular necessite d'avoir [Node.js](https://nodejs.org/fr/) en version **8.9** au minimum.
-Si vous disposez de [Node Version Manager](https://github.com/nvm-sh/nvm/blob/master/README.md) sur votre machine, la commande `nvm use` vous permet de changer rapidement de version pour passer à celle minimum requise.
-
-La commande `npm install` vous permettra d'installer toutes les dépendances dont le projet à besoin pour fonctionner.
-
-## Serveur de développement
-
-La commande `ng serve` permet de créer un serveur local sur le port 4200.
-Naviguez via l'adresse: `http://localhost:4200/`.
-L'application de recharge automatiquement lorsque des changements sur le code source sont enregistrés.
-
-## Build
+### Build
 
 La commande `ng build` permet de build le projet.
 Le build généré sera disponible dans le répertoire `dist/`. Utilisez le préfix `--prod` pour lancer un build de production.
@@ -63,12 +50,12 @@ Je dois cliquer ou saisir un caractère pour l'afficher dans le mot caché, s'il
 Je dispose d'un compteur qui me permet de connaître le nombre d'essais restant.
 L'application doit me féliciter ou non en fin de partie.
 
-## Critères de qualité
+### Critères de qualité
 
 - Le code doit être structuré et commenté
 - Le projet doit être responsive et un minimum stylisé
 
-## Evolutions à venir
+### Evolutions à venir
 
 - Enregistrer le score des participants, et pouvoir consulter tout les résultat depuis l'application.
 - Afficher à l'utilisateur les caractères qu'il a déjà rentrés dans l'application pour découvrir le mot caché.
