@@ -1,14 +1,28 @@
-# IadTest
+# Jeu du pendu
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.9.
+Le Pendu est un jeu consistant à trouver un mot en devinant quelles sont les lettres qui le composent.
 
-## Development server
+## Déroulement
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Une fois votre pseudo enregistré, le jeu génère un mot caché aléatoirement.
+Le joueur doit deviner le mot en proposant à l'interface des caractères un part un.
+Lorsque vous trouvez un bon caractère, toutes les occurrences présentes dans le mot sont révélées et aucune "chance" ne vous est retirée.
+Vous disposez de 10 chances pour trouver le mot.
 
-## Code scaffolding
+Le jeu se termine lorsque le joueur trouve le mot caché, ou à utilisé toutes ses chances.
+Après un message de félicitation, ou non, le jeu ce relance directement sur une nouvelle partie.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+
+# Développement
+
+Le but de ce projet était de recréer le Jeu du Pendu en JavaScript, avec le framework Angular7.
+
+## Serveur de développement
+
+La commande `ng serve` permet de créer un serveur local sur le port 4200.
+Naviguez vers `http://localhost:4200/`.
+L'application de recharge automatiquement lorsque des changements sur le code source sont enregistrés.
 
 # Installation
 
@@ -25,16 +39,34 @@ L'application de recharge automatiquement lorsque des changements sur le code so
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+La commande `ng build` permet de build le projet.
+Le build généré sera disponible dans le répertoire `dist/`. Utilisez le préfix `--prod` pour lancer un build de production.
 
-## Running unit tests
+## Contraintes
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Utilisation du framework AngularN
+- Développement sous forme de composants
+- Développement en ES6 obligatoire
+- Interdiction d'utiliser Yeoman
+- Écrire une documentation permettant d'installer / configurer et utiliser le Pendu
 
-## Running end-to-end tests
+Au démarrage, je suis invité à rentrer mon pseudo.
+Un mot dont les lettres sont masquées est généré.
+Je dois cliquer ou saisir un caractère pour l'afficher dans le mot caché, s'il est présent.
+Je dispose d'un compteur qui me permet de connaître le nombre d'essais restant.
+L'application doit me féliciter ou non en fin de partie.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Critères de qualité
 
-## Further help
+- Le code doit être structuré et commenté
+- Le projet doit être responsive et un minimum stylisé
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Evolutions
+
+- Enregistrer le score des participants, et pouvoir consulter tout les résultat depuis l'application.
+- Afficher à l'utilisateur les caractères qu'il a déjà rentrés dans l'application pour découvrir le mot caché.
+- Voir l'évolution des chances restantes grâce à une animation du pendu.
+- Proposer plusieurs thèmes de mot à deviner.
+- Permettre à l'utilisateur de créer un thème ainsi que sa propre liste de mot, disponible online.
+- Lorsque le joueur relance une partie, le prochain mot a deviner devra obligatoirement être différent des mots déjà proposés, ou indiquer que tous les mots de son thème on été devinés.
+- Proposer à l'utilisateur de rentrer un mot comme réponse.
