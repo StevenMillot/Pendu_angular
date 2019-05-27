@@ -13,15 +13,17 @@ Le jeu se termine lorsque le joueur trouve le mot caché, ou à utilisé toutes 
 Après un message de félicitation, ou non, le jeu ce relance directement sur une nouvelle partie.
 
 
+# Installation
 
-# Développement
+La version actuel d'Angular necessite d'avoir [Node.js](https://nodejs.org/fr/) en version **8.9** au minimum.
+Si vous disposer de [Node Version Manager](https://github.com/nvm-sh/nvm/blob/master/README.md) sur votre machine, la commande `nvm use` vous permet de changer rapidement de version pour passer à celle minimum requise.
 
-Le but de ce projet était de recréer le Jeu du Pendu en JavaScript, avec le framework Angular7.
+La commande `npm install` vous permettra d'installer toutes les dépendances dont le projet à besoin pour fonctionner.
 
 ## Serveur de développement
 
 La commande `ng serve` permet de créer un serveur local sur le port 4200.
-Naviguez vers `http://localhost:4200/`.
+Naviguez via l'adresse: `http://localhost:4200/`.
 L'application de recharge automatiquement lorsque des changements sur le code source sont enregistrés.
 
 # Installation
@@ -42,7 +44,12 @@ L'application de recharge automatiquement lorsque des changements sur le code so
 La commande `ng build` permet de build le projet.
 Le build généré sera disponible dans le répertoire `dist/`. Utilisez le préfix `--prod` pour lancer un build de production.
 
-## Contraintes
+
+# Développement
+
+Le but de ce projet était de recréer le Jeu du Pendu en JavaScript, avec le framework Angular7.
+
+### Contraintes
 
 - Utilisation du framework AngularN
 - Développement sous forme de composants
@@ -61,7 +68,7 @@ L'application doit me féliciter ou non en fin de partie.
 - Le code doit être structuré et commenté
 - Le projet doit être responsive et un minimum stylisé
 
-## Evolutions
+## Evolutions à venir
 
 - Enregistrer le score des participants, et pouvoir consulter tout les résultat depuis l'application.
 - Afficher à l'utilisateur les caractères qu'il a déjà rentrés dans l'application pour découvrir le mot caché.
