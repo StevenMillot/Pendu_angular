@@ -145,6 +145,7 @@ export class GamePageComponent implements OnDestroy {
   badTry = (): void => {
     if (this.tryRemaining !== 0) {
       this.tryRemaining -= 1;
+      // this.drawPendu(this.tryRemaining);
       this.modalInjector(this.tryRemaining);
     }
   }
@@ -208,4 +209,90 @@ export class GamePageComponent implements OnDestroy {
     location.reload();
     // TODO real reset game with a new word
   }
+
+  // TODO create a Pendu animation.
+  // drawPendu = (tryRemaining: number) => {
+  //   const canvasZone = document.getElementById('myCanvas');
+  //   if (canvasZone.getContext) {
+  //     const ctx = canvasZone.getContext('2d');
+  //     switch (tryRemaining) {
+  //       case 10:
+  //         ctx.beginPath();
+  //         ctx.lineCap = 'round';
+  //         ctx.lineWidth = "10";
+  //         ctx.lineJoin = 'round';
+  //         ctx.strokeStyle = "rgb(23, 145, 167)";
+  //         ctx.moveTo(35, 295);
+  //         ctx.lineTo(5, 295);
+  //         ctx.stroke();
+  //         break;
+  //       case 9:
+  //         ctx.moveTo(20, 295);
+  //         ctx.lineTo(20, 5);
+  //         ctx.stroke();
+  //         break;
+  //       case 8:
+  //         ctx.lineTo(200, 5);
+  //         ctx.stroke();
+  //         break;
+  //       case 7:
+  //         ctx.lineTo(200, 50);
+  //         ctx.stroke();
+  //         break;
+  //       case 6:
+  //         ctx.moveTo(20, 50);
+  //         ctx.lineTo(70, 5);
+  //         ctx.stroke();
+  //         break;
+  //       case 5:
+  //         ctx.beginPath();
+  //         ctx.fillStyle = "red";
+  //         ctx.arc(200, 50, 20, 0, Math.PI * 2);
+  //         ctx.fill();
+  //         break;
+  //       case 4:
+  //         ctx.beginPath();
+  //         ctx.strokeStyle = "red";
+  //         ctx.moveTo(200, 50);
+  //         ctx.lineTo(200, 150);
+  //         ctx.stroke();
+  //         break;
+  //       case 3:
+  //         ctx.beginPath();
+  //         ctx.moveTo(200, 80);
+  //         ctx.lineTo(160, 110);
+  //         ctx.stroke();
+  //         break;
+  //       case 2:
+  //         ctx.beginPath();
+  //         ctx.moveTo(200, 80);
+  //         ctx.lineTo(240, 110);
+  //         ctx.stroke();
+  //         break;
+  //       case 1:
+  //         ctx.beginPath();
+  //         ctx.moveTo(200, 150);
+  //         ctx.lineTo(180, 200);
+  //         ctx.stroke();
+  //         break;
+  //       case 0:
+  //         ctx.beginPath();
+  //         ctx.moveTo(200, 150);
+  //         ctx.lineTo(220, 200);
+  //         ctx.stroke();
+  //         ctx.beginPath();
+  //         ctx.fillStyle = "rgb(23, 145, 167)";
+  //         ctx.arc(200, 62, 16, 0, Math.PI * 2);
+  //         ctx.fill();
+  //         ctx.beginPath();
+  //         ctx.fillStyle = "red";
+  //         ctx.arc(200, 50, 20, 0, Math.PI * 2);
+  //         ctx.fill();
+  //         break;
+
+  //        default:
+  //         ctx.clearRect(0, 0, 300, 300);
+  //     }
+  //   }
+  // }
 }
