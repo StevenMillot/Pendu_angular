@@ -17,14 +17,14 @@ const appRoute: Routes = [
 ];
 
 @NgModule({
-   declarations: [ // composants
+   declarations: [
       AppComponent,
       LoginComponent,
       GamePageComponent,
       CardComponent,
       ModalComponent
    ],
-   imports: [ // module de plusieurs services ou composants
+   imports: [
       BrowserModule,
       AppRoutingModule,
       FormsModule,
