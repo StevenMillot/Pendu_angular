@@ -6,25 +6,25 @@ Le Pendu est un jeu consistant à trouver un mot en devinant quelles sont les le
 
 Une fois votre pseudo enregistré, le jeu génère un mot caché aléatoirement.
 Le joueur doit deviner le mot en proposant à l'interface des caractères un part un.
-Lorsque vous trouvez un bon caractère, toutes les occurrences présentes dans le mot sont révélées et aucun essais ne vous est retiré.
 Vous disposez de 10 essais pour trouver le mot.
+Lorsque vous trouvez un bon caractère, toutes les lettres identiques seront révélées et aucun essai ne vous est retiré.
 
-Le jeu se termine lorsque le joueur trouve le mot caché, ou à utilisé toutes ses chances.
-Après un message de félicitation, ou non, le jeu ce relance directement sur une nouvelle partie.
+Le jeu se termine lorsque le joueur trouve le mot caché, ou a utilisé toutes ses chances.
+Après un message de félicitation, ou non, le jeu se relance directement sur une nouvelle partie.
 
 
 # Installation
 
-La version actuelle d'Angular necessite d'avoir [Node.js](https://nodejs.org/fr/) en version **8.9** au minimum.
+La version actuelle d'Angular nécessite d'avoir [Node.js](https://nodejs.org/fr/) en version **8.9** au minimum.
 Si vous disposez de [Node Version Manager](https://github.com/nvm-sh/nvm/blob/master/README.md) sur votre machine, la commande `nvm use` vous permet de changer rapidement de version pour passer à celle minimum requise.
 
-La commande `npm install` vous permettra d'installer toutes les dépendances dont le projet à besoin pour fonctionner.
+La commande `npm install` vous permettra d'installer toutes les dépendances dont le projet a besoin pour fonctionner.
 
 ### Serveur de développement
 
 La commande `ng serve` permet de créer un serveur local sur le port 4200.
 Naviguez via l'adresse: `http://localhost:4200/`.
-L'application de recharge automatiquement lorsque des changements sur le code source sont enregistrés.
+L'application se recharge automatiquement lorsque des changements sur le code source sont enregistrés.
 
 ### Build
 
@@ -34,7 +34,7 @@ Le build généré sera disponible dans le répertoire `dist/`. Utilisez le pré
 
 # Développement
 
-Le but de ce projet était de recréer le Jeu du Pendu en JavaScript, avec le framework Angular7.
+Le but de ce projet est de recréer le Jeu du Pendu en JavaScript, avec le framework Angular7.
 
 ### Contraintes
 
@@ -57,10 +57,10 @@ L'application doit me féliciter ou non en fin de partie.
 
 ### Evolutions à venir
 
-- Enregistrer le score des participants, et pouvoir consulter tout les résultat depuis l'application.
+- Enregistrer le score des participants, et pouvoir consulter tous les résultats depuis l'application.
 - Afficher à l'utilisateur les caractères qu'il a déjà rentrés dans l'application pour découvrir le mot caché.
 - Voir l'évolution des chances restantes grâce à une animation du pendu.
 - Proposer plusieurs thèmes de mot à deviner.
 - Permettre à l'utilisateur de créer un thème ainsi que sa propre liste de mot, disponible online.
-- Lorsque le joueur relance une partie, le prochain mot a deviner devra obligatoirement être différent des mots déjà proposés, ou indiquer que tous les mots de son thème on été devinés.
+- Lorsque le joueur relance une partie, le prochain mot à deviner devra obligatoirement être différent des mots déjà proposés, ou indiquer que tous les mots de son thème on été devinés.
 - Proposer à l'utilisateur de rentrer un mot comme réponse.
