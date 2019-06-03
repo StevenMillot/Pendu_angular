@@ -13,7 +13,7 @@ import { ModalComponent } from 'src/components/modal/modal.component';
 const appRoute: Routes = [
    { path: 'login', component: LoginComponent },
    { path: 'game', component: GamePageComponent },
-   { path: '**', redirectTo: '/login' },
+   { path: '**', component: LoginComponent }
 ];
 
 @NgModule({
